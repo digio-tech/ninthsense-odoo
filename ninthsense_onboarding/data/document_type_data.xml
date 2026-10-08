@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="document_type_aadhaar_front" model="ninthsense.onboarding.document.type">
+        <field name="code">aadhaar_front</field>
+        <field name="name">Aadhaar Card Front</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="document_type_aadhaar_back" model="ninthsense.onboarding.document.type">
+        <field name="code">aadhaar_back</field>
+        <field name="name">Aadhaar Card Back</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="document_type_pan_card" model="ninthsense.onboarding.document.type">
+        <field name="code">pan_card</field>
+        <field name="name">PAN Card</field>
+        <field name="sequence">3</field>
+    </record>
+    <record id="document_type_driving_license" model="ninthsense.onboarding.document.type">
+        <field name="code">driving_license</field>
+        <field name="name">Driving License</field>
+        <field name="sequence">4</field>
+    </record>
+    <record id="document_type_passport" model="ninthsense.onboarding.document.type">
+        <field name="code">passport</field>
+        <field name="name">Passport</field>
+        <field name="sequence">5</field>
+    </record>
+    <record id="document_type_passport_photo" model="ninthsense.onboarding.document.type">
+        <field name="code">passport_photo</field>
+        <field name="name">Passport Photo</field>
+        <field name="sequence">6</field>
+    </record>
+    <record id="document_type_graduation_certificate" model="ninthsense.onboarding.document.type">
+        <field name="code">graduation_certificate</field>
+        <field name="name">Graduation Certificate</field>
+        <field name="sequence">7</field>
+    </record>
+    <record id="document_type_masters_certificate" model="ninthsense.onboarding.document.type">
+        <field name="code">masters_certificate</field>
+        <field name="name">Masters Certificate</field>
+        <field name="sequence">8</field>
+    </record>
+    <record id="document_type_resume" model="ninthsense.onboarding.document.type">
+        <field name="code">resume</field>
+        <field name="name">Resume</field>
+        <field name="sequence">9</field>
+    </record>
+    <record id="document_type_offer_letter" model="ninthsense.onboarding.document.type">
+        <field name="code">offer_letter</field>
+        <field name="name">Offer Letter</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="document_type_experience_letter" model="ninthsense.onboarding.document.type">
+        <field name="code">experience_letter</field>
+        <field name="name">Experience Letter</field>
+        <field name="sequence">11</field>
+    </record>
+    <record id="document_type_latest_pay_slip" model="ninthsense.onboarding.document.type">
+        <field name="code">latest_pay_slip</field>
+        <field name="name">Latest Pay Slip</field>
+        <field name="sequence">12</field>
+    </record>
+    <record id="document_type_bank_statement" model="ninthsense.onboarding.document.type">
+        <field name="code">bank_statement</field>
+        <field name="name">Bank Account Statement</field>
+        <field name="sequence">13</field>
+    </record>
+    <record id="document_type_cancelled_cheque" model="ninthsense.onboarding.document.type">
+        <field name="code">cancelled_cheque</field>
+        <field name="name">Cancelled Cheque</field>
+        <field name="sequence">14</field>
+    </record>
+</odoo>

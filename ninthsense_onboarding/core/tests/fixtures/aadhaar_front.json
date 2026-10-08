@@ -1,0 +1,10 @@
+{
+  "document_type": "aadhaar_front",
+  "confidence": 0.96,
+  "extracted": {
+    "name": "Priya Raghavan",
+    "date_of_birth": "1997-11-09",
+    "gender": "F",
+    "aadhaar_number": "2345 6789 0123"
+  }
+}

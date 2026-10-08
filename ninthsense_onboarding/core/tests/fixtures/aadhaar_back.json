@@ -1,0 +1,10 @@
+{
+  "document_type": "aadhaar_back",
+  "confidence": 0.94,
+  "extracted": {
+    "name": "Priya Raghavan",
+    "aadhaar_number": "2345 6789 0123",
+    "address": "14 Nandi Durga Road, Benson Town, Bengaluru 560046",
+    "father_name": "Raghavan Menon"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "2.0",
+  "ref": "ONB-2026-0042",
+  "goal_key": "onboarding",
+  "stage": "Onboarding",
+  "catalogue_version": 1,
+  "status": "completed",
+  "completed_at": "2026-09-29T10:15:02.114Z",
+  "steps": [
+    {
+      "id": "docs",
+      "type": "document_collection",
+      "provider": {
+        "name": "9thsense",
+        "session_id": "mock_5b0e",
+        "case_status": "completed"
+      },
+      "result": {
+        "cross_match": "passed",
+        "checks": [
+          {"label": "pan_card", "document_type": "pan_card", "status": "done"}
+        ]
+      },
+      "documents": [
+        {
+          "document_code": "pan_card",
+          "verification_document_id": "mockdoc_9c1f",
+          "doc_index": 0,
+          "detected_document_type": "pan_card",
+          "is_detected_type_expected": true,
+          "confidence": 0.95,
+          "low_confidence": false,
+          "file_name": "pan_card.png",
+          "mime_type": "image/png",
+          "size_bytes": 48211,
+          "status": "done",
+          "extracted": {
+            "name": "Priya Raghavan",
+            "date_of_birth": "1997-11-09",
+            "pan_number": "ABCPR1234F",
+            "father_name": "Raghavan Menon"
+          }
+        }
+      ],
+      "extractions": {
+        "name": "Priya Raghavan",
+        "date_of_birth": "1997-11-09",
+        "pan_number": "ABCPR1234F",
+        "father_name": "Raghavan Menon"
+      },
+      "missing_documents": []
+    }
+  ],
+  "x-hrms": {
+    "employee_application": "HR-EMP-APP-2026-0042"
+  }
+}

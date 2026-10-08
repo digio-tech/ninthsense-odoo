@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="onboarding_request_view_list" model="ir.ui.view">
+        <field name="name">ninthsense.onboarding.request.list</field>
+        <field name="model">ninthsense.onboarding.request</field>
+        <field name="arch" type="xml">
+            <list create="0" decoration-muted="state == 'cancelled'">
+                <field name="ref"/>
+                <field name="applicant_name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="state" widget="badge"/>
+                <field name="invite_state" widget="badge"/>
+                <field name="received_at"/>
+                <field name="employee_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="onboarding_request_view_search" model="ir.ui.view">
+        <field name="name">ninthsense.onboarding.request.search</field>
+        <field name="model">ninthsense.onboarding.request</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="ref"/>
+                <field name="applicant_name"/>
+                <filter name="link_sent" string="Link sent" domain="[('state', '=', 'link_sent')]"/>
+                <filter name="data_received" string="Data received" domain="[('state', '=', 'data_received')]"/>
+                <filter name="completed" string="Completed" domain="[('state', '=', 'completed')]"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <group>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="onboarding_request_view_form" model="ir.ui.view">
+        <field name="name">ninthsense.onboarding.request.form</field>
+        <field name="model">ninthsense.onboarding.request</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="link_sent,data_received,completed"/>
+                </header>
+                <div class="alert alert-danger mb-0" role="alert" invisible="invite_state != 'failed'">The onboarding email could not be delivered: <field name="invite_failure" class="oe_inline"/>. Resend the link to issue a new one, then copy it from the dialog.</div>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="ref"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="applicant_name"/>
+                            <field name="candidate_email"/>
+                            <field name="template_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="invite_state"/>
+                            <field name="received_at"/>
+                            <field name="employee_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="documents" string="Documents">
+                            <div class="text-muted" invisible="document_ids">No documents yet</div>
+                            <field name="document_ids" nolabel="1" invisible="not document_ids" readonly="1">
+                                <list>
+                                    <field name="code"/>
+                                    <field name="attachment_id"/>
+                                    <field name="received_at"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="parsed_data" string="Parsed data">
+                            <div class="text-muted" invisible="value_ids">No data received yet</div>
+                            <field name="value_ids" nolabel="1" invisible="not value_ids" readonly="1">
+                                <list>
+                                    <field name="label"/>
+                                    <field name="value"/>
+                                    <field name="source_name"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="fill_report" string="Fill report">
+                            <field name="fill_line_ids" invisible="1"/>
+                            <div class="text-muted" invisible="fill_line_ids">No fill report yet</div>
+                            <separator string="Filled" invisible="not fill_filled_ids"/>
+                            <field name="fill_filled_ids" nolabel="1" readonly="1" invisible="not fill_filled_ids">
+                                <list>
+                                    <field name="label"/>
+                                    <field name="value"/>
+                                </list>
+                            </field>
+                            <separator string="Skipped — already filled" invisible="not fill_different_ids"/>
+                            <field name="fill_different_ids" nolabel="1" readonly="1" invisible="not fill_different_ids">
+                                <list>
+                                    <field name="label"/>
+                                    <field name="value"/>
+                                    <field name="current_value"/>
+                                </list>
+                            </field>
+                            <separator string="Skipped — invalid" invisible="not fill_invalid_ids"/>
+                            <field name="fill_invalid_ids" nolabel="1" readonly="1" invisible="not fill_invalid_ids">
+                                <list>
+                                    <field name="label"/>
+                                    <field name="value"/>
+                                    <field name="reason"/>
+                                </list>
+                            </field>
+                            <separator string="Created on save" invisible="not fill_created_ids"/>
+                            <field name="fill_created_ids" nolabel="1" readonly="1" invisible="not fill_created_ids">
+                                <list>
+                                    <field name="label"/>
+                                    <field name="value"/>
+                                </list>
+                            </field>
+                            <separator string="Attachments that failed" invisible="not fill_failed_ids"/>
+                            <field name="fill_failed_ids" nolabel="1" readonly="1" invisible="not fill_failed_ids">
+                                <list>
+                                    <field name="label"/>
+                                    <field name="value"/>
+                                    <field name="reason"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="details" string="Details">
+                            <group>
+                                <group>
+                                    <field name="applicant_ref"/>
+                                    <field name="cancel_reason"/>
+                                    <field name="link_expires_at"/>
+                                    <field name="link_expired"/>
+                                </group>
+                                <group>
+                                    <field name="filled_at"/>
+                                    <field name="completed_at"/>
+                                </group>
+                            </group>
+                            <field name="line_ids" readonly="1">
+                                <list>
+                                    <field name="label"/>
+                                    <field name="mandatory"/>
+                                    <field name="accept"/>
+                                    <field name="max_mb"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="onboarding_request_action" model="ir.actions.act_window">
+        <field name="name">Onboarding Requests</field>
+        <field name="res_model">ninthsense.onboarding.request</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_onboarding_requests"
+        name="Onboarding"
+        parent="hr_recruitment.menu_hr_recruitment_root"
+        action="onboarding_request_action"
+        groups="hr_recruitment.group_hr_recruitment_user"
+        sequence="3"
+    />
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="onboarding_link_dialog_view_form" model="ir.ui.view">
+        <field name="name">ninthsense.onboarding.link.dialog.form</field>
+        <field name="model">ninthsense.onboarding.link.dialog</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <field name="email" invisible="1"/>
+                <field name="mail_server_missing" invisible="1"/>
+                <div class="alert alert-warning" role="alert" invisible="not mail_server_missing">No outgoing mail server is configured, so the email will not be delivered. Copy the link and send it to the candidate yourself.</div>
+                <h4><field name="message" readonly="1"/></h4>
+                <group>
+                    <field name="url" widget="CopyClipboardURL" readonly="1"/>
+                </group>
+                <footer>
+                    <button special="cancel" string="Close" class="btn-primary" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

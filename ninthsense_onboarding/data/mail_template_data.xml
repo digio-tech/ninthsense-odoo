@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="mail_template_onboarding_link" model="mail.template">
+        <field name="name">9thSense: Onboarding Link</field>
+        <field name="model_id" ref="model_ninthsense_onboarding_request"/>
+        <field name="subject">Your onboarding documents for {{ object.company_id.name }}</field>
+        <field name="email_from">{{ object.company_id.email_formatted or user.email_formatted }}</field>
+        <field name="use_default_to" eval="False"/>
+        <field name="email_to">{{ object.candidate_email }}</field>
+        <field name="auto_delete" eval="False"/>
+        <field name="body_html" type="html">
+<div>
+    <p>Hello <t t-out="object.applicant_name or ''">Candidate</t>,</p>
+    <p>
+        <t t-out="object.company_id.name or ''">Company</t> needs a few documents from you
+        to complete your onboarding.
+    </p>
+    <p>We have asked for <strong t-out="len(object.line_ids)">5</strong> document(s). Uploading them takes a few minutes, and you only need to do it once.</p>
+    <p>Open this link to upload your documents:</p>
+    <p style="word-break: break-all;"><a t-att-href="ctx.get('portal_url')" t-out="ctx.get('portal_url') or ''">https://portal.example.com/s/token</a></p>
+    <p>
+        The link is unique to you and works for <t t-out="ctx.get('link_validity_days') or ''">14</t> days,
+        until <strong t-out="format_date(object.link_expires_at)">01/01/2026</strong>. Please do not forward it.
+    </p>
+    <p>If anything is unclear, reply to this email and we will help.</p>
+</div>
+        </field>
+    </record>
+</odoo>

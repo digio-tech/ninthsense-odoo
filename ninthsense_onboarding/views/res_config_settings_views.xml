@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.ninthsense.onboarding</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr_recruitment.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <block name="recruitment_process_div" position="after">
+                <block title="9thSense Onboarding" name="ninthsense_onboarding_settings"
+                       groups="base.group_system">
+                    <setting id="ninthsense_onboarding_portal_url_setting" string="Wrapper Address"
+                             help="The address candidates open to upload their documents, without a path.">
+                        <field name="ninthsense_onboarding_portal_url" placeholder="https://onboarding.example.com"/>
+                    </setting>
+                    <setting id="ninthsense_onboarding_secret_setting" string="Shared Secret"
+                             help="Signs what the wrapper sends back. It is never shown again once saved; leave it empty to keep the current one.">
+                        <field name="ninthsense_onboarding_new_secret" password="True"
+                               autocomplete="new-password"/>
+                        <div class="text-muted">
+                            <span name="ninthsense_onboarding_secret_is_set"
+                                  invisible="not ninthsense_onboarding_secret_set">Secret is set</span>
+                            <span name="ninthsense_onboarding_secret_is_not_set"
+                                  invisible="ninthsense_onboarding_secret_set">No secret set</span>
+                        </div>
+                    </setting>
+                    <setting id="ninthsense_onboarding_validity_setting" string="Link Validity"
+                             help="How long a candidate's link keeps working.">
+                        <div class="d-flex align-items-baseline gap-2">
+                            <field name="ninthsense_onboarding_link_validity_days"/>
+                            <span>days</span>
+                        </div>
+                    </setting>
+                </block>
+            </block>
+        </field>
+    </record>
+</odoo>

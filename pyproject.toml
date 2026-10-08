@@ -1,0 +1,20 @@
+[project]
+name = "ninthsense-onboarding"
+version = "20.0.1.0.0"
+requires-python = ">=3.12"
+
+[project.optional-dependencies]
+test = ["jsonschema", "websocket-client"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "T20"]
+
+[tool.ruff.lint.per-file-ignores]
+# Odoo modules import submodules for their registration side effects and
+# manifests are a bare dict literal; neither pattern is a real lint issue.
+"**/__init__.py" = ["F401", "I001"]
+"**/__manifest__.py" = ["B018"]

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="template_onboarding" model="ninthsense.onboarding.template" forcecreate="0">
+        <field name="name">Standard Onboarding</field>
+        <field name="is_default" eval="True"/>
+        <field name="line_ids" eval="[
+            Command.create({
+                'sequence': 10,
+                'document_type_id': ref('document_type_aadhaar_front'),
+                'mandatory': True,
+                'accept_pdf': True,
+                'accept_jpg': True,
+                'accept_png': True,
+                'max_mb': 3,
+            }),
+            Command.create({
+                'sequence': 20,
+                'document_type_id': ref('document_type_aadhaar_back'),
+                'mandatory': False,
+                'accept_pdf': True,
+                'accept_jpg': True,
+                'accept_png': True,
+                'max_mb': 3,
+            }),
+            Command.create({
+                'sequence': 30,
+                'document_type_id': ref('document_type_pan_card'),
+                'mandatory': True,
+                'accept_pdf': True,
+                'accept_jpg': True,
+                'accept_png': True,
+                'max_mb': 3,
+            }),
+            Command.create({
+                'sequence': 40,
+                'document_type_id': ref('document_type_resume'),
+                'mandatory': True,
+                'accept_pdf': True,
+                'accept_jpg': False,
+                'accept_png': False,
+                'max_mb': 3,
+            }),
+            Command.create({
+                'sequence': 50,
+                'document_type_id': ref('document_type_graduation_certificate'),
+                'mandatory': True,
+                'accept_pdf': True,
+                'accept_jpg': True,
+                'accept_png': True,
+                'max_mb': 3,
+            }),
+            Command.create({
+                'sequence': 60,
+                'document_type_id': ref('document_type_latest_pay_slip'),
+                'mandatory': False,
+                'accept_pdf': True,
+                'accept_jpg': False,
+                'accept_png': False,
+                'max_mb': 3,
+            }),
+            Command.create({
+                'sequence': 70,
+                'document_type_id': ref('document_type_cancelled_cheque'),
+                'mandatory': True,
+                'accept_pdf': True,
+                'accept_jpg': True,
+                'accept_png': True,
+                'max_mb': 3,
+            }),
+            Command.create({
+                'sequence': 80,
+                'document_type_id': ref('document_type_bank_statement'),
+                'mandatory': False,
+                'accept_pdf': True,
+                'accept_jpg': False,
+                'accept_png': False,
+                'max_mb': 3,
+            }),
+            Command.create({
+                'sequence': 90,
+                'document_type_id': ref('document_type_passport'),
+                'mandatory': False,
+                'accept_pdf': True,
+                'accept_jpg': False,
+                'accept_png': False,
+                'max_mb': 3,
+            }),
+        ]"/>
+        <field name="mapping_ids" eval="[
+            Command.create({
+                'field_key': 'legal_name',
+                'source_type_id': ref('document_type_aadhaar_front'),
+                'fallback_type_id': ref('document_type_pan_card'),
+            }),
+            Command.create({
+                'field_key': 'sex',
+                'source_type_id': ref('document_type_aadhaar_front'),
+                'fallback_type_id': False,
+            }),
+            Command.create({
+                'field_key': 'date_of_birth',
+                'source_type_id': ref('document_type_aadhaar_front'),
+                'fallback_type_id': ref('document_type_pan_card'),
+            }),
+            Command.create({
+                'field_key': 'cell_number',
+                'source_type_id': ref('document_type_resume'),
+                'fallback_type_id': ref('document_type_bank_statement'),
+            }),
+            Command.create({
+                'field_key': 'personal_email',
+                'source_type_id': ref('document_type_resume'),
+                'fallback_type_id': ref('document_type_bank_statement'),
+            }),
+            Command.create({
+                'field_key': 'current_address',
+                'source_type_id': ref('document_type_aadhaar_back'),
+                'fallback_type_id': ref('document_type_aadhaar_front'),
+            }),
+            Command.create({
+                'field_key': 'permanent_address',
+                'source_type_id': ref('document_type_aadhaar_back'),
+                'fallback_type_id': ref('document_type_aadhaar_front'),
+            }),
+            Command.create({
+                'field_key': 'education.institution',
+                'source_type_id': ref('document_type_graduation_certificate'),
+                'fallback_type_id': ref('document_type_resume'),
+            }),
+            Command.create({
+                'field_key': 'education.degree',
+                'source_type_id': ref('document_type_graduation_certificate'),
+                'fallback_type_id': ref('document_type_resume'),
+            }),
+            Command.create({
+                'field_key': 'education.year',
+                'source_type_id': ref('document_type_graduation_certificate'),
+                'fallback_type_id': ref('document_type_resume'),
+            }),
+            Command.create({
+                'field_key': 'education.percentage',
+                'source_type_id': ref('document_type_graduation_certificate'),
+                'fallback_type_id': False,
+            }),
+            Command.create({
+                'field_key': 'external_work_history.employer',
+                'source_type_id': ref('document_type_resume'),
+                'fallback_type_id': ref('document_type_latest_pay_slip'),
+            }),
+            Command.create({
+                'field_key': 'external_work_history.designation',
+                'source_type_id': ref('document_type_resume'),
+                'fallback_type_id': ref('document_type_latest_pay_slip'),
+            }),
+            Command.create({
+                'field_key': 'external_work_history.total_experience',
+                'source_type_id': ref('document_type_resume'),
+                'fallback_type_id': False,
+            }),
+            Command.create({
+                'field_key': 'bank_name',
+                'source_type_id': ref('document_type_cancelled_cheque'),
+                'fallback_type_id': ref('document_type_bank_statement'),
+            }),
+            Command.create({
+                'field_key': 'bank_ac_no',
+                'source_type_id': ref('document_type_cancelled_cheque'),
+                'fallback_type_id': ref('document_type_bank_statement'),
+            }),
+            Command.create({
+                'field_key': 'ifsc_code',
+                'source_type_id': ref('document_type_cancelled_cheque'),
+                'fallback_type_id': ref('document_type_bank_statement'),
+            }),
+            Command.create({
+                'field_key': 'micr_code',
+                'source_type_id': ref('document_type_cancelled_cheque'),
+                'fallback_type_id': False,
+            }),
+            Command.create({
+                'field_key': 'pan_number',
+                'source_type_id': ref('document_type_pan_card'),
+                'fallback_type_id': ref('document_type_latest_pay_slip'),
+            }),
+            Command.create({
+                'field_key': 'aadhaar_number',
+                'source_type_id': ref('document_type_aadhaar_front'),
+                'fallback_type_id': False,
+            }),
+            Command.create({
+                'field_key': 'provident_fund_account',
+                'source_type_id': ref('document_type_latest_pay_slip'),
+                'fallback_type_id': False,
+            }),
+            Command.create({
+                'field_key': 'passport_number',
+                'source_type_id': ref('document_type_passport'),
+                'fallback_type_id': False,
+            }),
+            Command.create({
+                'field_key': 'date_of_issue',
+                'source_type_id': ref('document_type_passport'),
+                'fallback_type_id': False,
+            }),
+            Command.create({
+                'field_key': 'valid_upto',
+                'source_type_id': ref('document_type_passport'),
+                'fallback_type_id': False,
+            }),
+            Command.create({
+                'field_key': 'place_of_issue',
+                'source_type_id': ref('document_type_passport'),
+                'fallback_type_id': False,
+            }),
+        ]"/>
+    </record>
+</odoo>

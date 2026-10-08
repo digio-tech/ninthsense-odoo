@@ -1,0 +1,10 @@
+{
+  "document_type": "degree_certificate",
+  "confidence": 0.89,
+  "extracted": {
+    "name": "Priya Raghavan",
+    "institution": "RV College of Engineering",
+    "degree": "B.E. Information Science",
+    "year_of_passing": "2019"
+  }
+}

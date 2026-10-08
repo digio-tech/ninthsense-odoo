@@ -1,0 +1,11 @@
+{
+  "document_type": "cancelled_cheque",
+  "confidence": 0.91,
+  "extracted": {
+    "account_holder": "Priya Raghavan",
+    "account_number": "50100247731902",
+    "ifsc_code": "HDFC0000123",
+    "bank_name": "HDFC Bank",
+    "branch": "Bengaluru Cantonment"
+  }
+}

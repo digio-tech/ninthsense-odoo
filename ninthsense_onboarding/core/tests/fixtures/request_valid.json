@@ -1,0 +1,98 @@
+{
+  "schema_version": "2.0",
+  "ref": "ONB-2026-0042",
+  "hrms": {
+    "system": "odoo",
+    "instance": "https://hr.example.com"
+  },
+  "goal_key": "onboarding",
+  "stage": "Onboarding",
+  "catalogue_version": 1,
+  "state": "open",
+  "expires_at": "2026-09-18T10:00:00Z",
+  "subject": {
+    "display_name": "Priya"
+  },
+  "copy": {
+    "welcome_title": "Welcome, {display_name}",
+    "welcome_body": "Upload the documents below to complete your onboarding at {org_name}."
+  },
+  "features": {
+    "allow_replace_before_submit": true,
+    "classifier_confidence_threshold": 0.85,
+    "on_classifier_disagreement": "warn"
+  },
+  "steps": [
+    {
+      "id": "docs",
+      "type": "document_collection",
+      "documents": [
+        {
+          "document_code": "aadhaar_front",
+          "label": "Aadhaar Card Front",
+          "group": "Identity",
+          "order": 1,
+          "mandatory": true,
+          "accept": [".pdf", ".jpg", ".jpeg", ".png"],
+          "max_bytes": 3145728,
+          "help": "Front side, all four corners visible."
+        },
+        {
+          "document_code": "aadhaar_back",
+          "label": "Aadhaar Card Back",
+          "group": "Identity",
+          "order": 2,
+          "mandatory": true,
+          "accept": [".pdf", ".jpg", ".jpeg", ".png"],
+          "max_bytes": 3145728,
+          "help": "The side showing your address."
+        },
+        {
+          "document_code": "pan_card",
+          "label": "PAN Card",
+          "group": "Identity",
+          "order": 3,
+          "mandatory": true,
+          "accept": [".pdf", ".jpg", ".jpeg", ".png"],
+          "max_bytes": 3145728
+        },
+        {
+          "document_code": "cancelled_cheque",
+          "label": "Cancelled Cheque",
+          "group": "Banking",
+          "order": 4,
+          "mandatory": true,
+          "accept": [".pdf", ".jpg", ".jpeg", ".png"],
+          "max_bytes": 5242880,
+          "help": "Name, account number and IFSC must be readable."
+        },
+        {
+          "document_code": "degree_certificate",
+          "label": "Degree Certificate",
+          "group": "Education",
+          "order": 5,
+          "mandatory": false,
+          "accept": [".pdf", ".jpg", ".jpeg", ".png", ".heic"],
+          "max_bytes": 10485760,
+          "help": "The consolidated degree or provisional certificate."
+        },
+        {
+          "document_code": "passport_photo",
+          "label": "Passport Photo",
+          "group": "Education",
+          "order": 6,
+          "mandatory": false,
+          "accept": [".jpg", ".jpeg", ".png"],
+          "max_bytes": 2097152,
+          "help": "Plain background, face clearly visible."
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "callback_path": "/api/method/ninthsense.document_collection.portal_api.store_verification"
+  },
+  "x-hrms": {
+    "employee_application": "HR-EMP-APP-2026-0042"
+  }
+}
