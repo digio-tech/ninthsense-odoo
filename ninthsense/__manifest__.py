@@ -3,18 +3,6 @@
     "version": "20.0.1.0.0",
     "category": "Human Resources/Recruitment",
     "summary": "Collect a hired applicant's documents through 9thSense and fill the new employee",
-    "description": """
-Send a hired applicant a 9thSense onboarding link from the applicant form. The
-candidate uploads their documents, 9thSense reads them, and Create Employee
-fills the new employee's empty fields from what was read: personal details,
-address, identity numbers, bank account and résumé lines.
-
-- Onboarding templates choose the documents to collect and which document fills each field.
-- Values from HR or Odoo are never overwritten, and a report shows what was filled and skipped.
-- Aadhaar numbers are stored masked.
-
-Requires a 9thSense account and its onboarding portal.
-""",
     "author": "Digio Labs",
     "license": "LGPL-3",
     "application": False,

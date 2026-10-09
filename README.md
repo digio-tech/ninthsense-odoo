@@ -1,78 +1,77 @@
 # ninthsense for Odoo
 
-An Odoo 20 add-on for Recruitment. HR sends a hired applicant a 9thSense
-onboarding link. The candidate uploads their documents, 9thSense reads them,
-and **Create Employee** saves the new employee with every empty mapped field
-filled from what was read.
+[![License: LGPL-3](https://img.shields.io/badge/license-LGPL--3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0.html)
+[![Odoo 20.0](https://img.shields.io/badge/Odoo-20.0-714B67.svg)](https://github.com/digio-tech/ninthsense-odoo/tree/20.0)
 
-- Onboarding templates choose which documents to collect and which document
-  fills each employee field.
-- Values from HR or Odoo are never overwritten, and a fill report on each
-  request shows what was filled and what was skipped.
-- Aadhaar numbers are stored masked.
+Odoo integration for 9thSense onboarding. HR sends a hired applicant a 9thSense
+onboarding link, the candidate uploads their documents, and **Create Employee**
+saves the new employee with every empty field filled from what 9thSense read.
 
-Requires a 9thSense account and its onboarding portal. License: LGPL-3.
+## Available addons
 
-## Branches
+| addon | version | summary |
+| --- | --- | --- |
+| [ninthsense](ninthsense/) | 20.0.1.0.0 | Collect a hired applicant's documents through 9thSense and fill the new employee |
+
+The module's own [README](ninthsense/README.rst) covers configuration, usage
+and known issues in full.
+
+## Requirements
+
+- Odoo 20.0, Community or Enterprise, self-hosted or Odoo.sh. Odoo Online
+  cannot install it, because it needs the Python package below.
+- The Python package `jsonschema`, listed in [`requirements.txt`](requirements.txt).
+- A 9thSense account and its onboarding portal.
+
+## Installation
+
+1. Add this repository to the Odoo server's `addons_path`.
+2. Install the requirements in Odoo's Python environment:
+   `pip install -r requirements.txt`. Odoo.sh does this automatically.
+3. In **Apps**, install **ninthsense**. It installs Recruitment, Employees and
+   Skills if they are missing, and seeds the "Standard Onboarding" template,
+   the document types and the email template.
+
+## Configuration and usage
+
+Set the 9thSense portal address and shared secret in **Recruitment →
+Configuration → Settings → 9thSense Onboarding**. Then move an applicant to a
+hired stage, click **Send onboarding link**, and once the candidate's documents
+arrive, click **Create Employee**. The details are in the
+[module README](ninthsense/README.rst).
+
+## Bug tracker
+
+Report bugs on [GitHub Issues](https://github.com/digio-tech/ninthsense-odoo/issues).
+
+## Development
 
 | Branch | Purpose |
 | --- | --- |
-| `20.0` | Release branch for Odoo 20. The Odoo Apps store reads the module from here. |
-| `develop` | Integration branch. Feature branches are squash-merged here, then `develop` is merged into `20.0` for a release. |
+| `20.0` | Release branch for Odoo 20. The Odoo Apps store publishes from it. |
+| `develop` | Integration branch. Feature branches are squash-merged here. |
+| `main` | Default branch; follows `20.0` at each release. |
 
-## Repository layout
+To release, merge `develop` into `20.0` and `main`, bump `version` in
+`ninthsense/__manifest__.py`, and push.
 
-| Path | What it is |
-| --- | --- |
-| `ninthsense/` | The Odoo module; the only thing that ships |
-| `requirements.txt` | Python packages the module needs (`jsonschema`); Odoo.sh installs these |
-| `scripts/check.sh` | The single quality gate: lint, dependency audit, unit tests, Odoo tests |
-| `scripts/gen_contract_types.sh` | Regenerates `core/contract_types.py` from the vendored portal schemas |
-| `scripts/requirements-dev.txt` | Packages the gate installs into the Odoo venv |
-
-## Install
-
-1. Put this repository on the Odoo server's `addons_path`.
-2. `pip install -r requirements.txt` in Odoo's Python environment (Odoo.sh does
-   this automatically).
-3. Install **ninthsense** from Apps. It installs Recruitment,
-   Employees and Skills if they are missing, and seeds the "Standard
-   Onboarding" template, the document types and the email template.
-
-## Configure
-
-As an administrator, in **Recruitment → Configuration → Settings → 9thSense
-Onboarding**:
-
-- **Wrapper Address**: the `https://` origin of your 9thSense onboarding portal.
-- **Shared Secret**: the secret the portal signs deliveries with (at least 32
-  characters). It is write-only; the field is always empty when reopened.
-- **Link Validity**: how many days a candidate link stays valid (default 14).
-
-Configure an outgoing mail server so candidates receive the link. Without one,
-HR can still copy the link from the dialog shown after **Send onboarding link**.
-
-## Use
-
-1. Move an applicant to a hired stage and click **Send onboarding link**. With
-   more than one template, pick one; the default is preselected.
-2. The candidate uploads documents through the link. The request moves to
-   **Data received**.
-3. Click **Create Employee**. The employee is saved with its empty fields
-   filled, the documents attached, and the bank account and résumé lines
-   created. The request moves to **Completed** and shows the fill report.
-
-Requests are under **Recruitment → Onboarding**, and from the applicant's
-**Onboarding** smart button. Templates are under **Recruitment → Configuration
-→ Onboarding Templates**.
-
-## Develop
-
-The gate needs an Odoo 20 checkout with a `.venv`. By default it is this
-repository's parent directory; set `ODOO_DIR` otherwise.
+`scripts/check.sh` is the single quality gate: lint, dependency audit, unit
+tests and the Odoo test suite on a throwaway database. It needs an Odoo 20
+checkout with a `.venv`, by default this repository's parent directory, or
+wherever `ODOO_DIR` points:
 
 ```sh
 ODOO_DIR=/path/to/odoo PG_BIN=/opt/homebrew/opt/postgresql@16/bin scripts/check.sh
 ```
 
-Code targets Python 3.12, the lowest version Odoo 20 supports.
+`scripts/gen_contract_types.sh` regenerates `ninthsense/core/contract_types.py`
+from the vendored portal schemas. Code targets Python 3.12, the lowest version
+Odoo 20 supports.
+
+## Credits
+
+Developed and maintained by Digio Labs.
+
+## License
+
+[LGPL-3](LICENSE).
