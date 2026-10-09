@@ -49,7 +49,7 @@ class OnboardingRequest(models.Model):
         required=True,
         readonly=True,
         copy=False,
-        default=lambda self: self.env["ir.sequence"].next_by_code("ninthsense_onboarding.request"),
+        default=lambda self: self.env["ir.sequence"].next_by_code("ninthsense.request"),
     )
     applicant_id = fields.Many2one("hr.applicant", ondelete="set null", index=True, readonly=True)
     applicant_ref = fields.Integer(readonly=True)

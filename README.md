@@ -1,4 +1,4 @@
-# 9thSense Onboarding for Odoo
+# ninthsense for Odoo
 
 An Odoo 20 add-on for Recruitment. HR sends a hired applicant a 9thSense
 onboarding link. The candidate uploads their documents, 9thSense reads them,
@@ -24,7 +24,7 @@ Requires a 9thSense account and its onboarding portal. License: LGPL-3.
 
 | Path | What it is |
 | --- | --- |
-| `ninthsense_onboarding/` | The Odoo module; the only thing that ships |
+| `ninthsense/` | The Odoo module; the only thing that ships |
 | `requirements.txt` | Python packages the module needs (`jsonschema`); Odoo.sh installs these |
 | `scripts/check.sh` | The single quality gate: lint, dependency audit, unit tests, Odoo tests |
 | `scripts/gen_contract_types.sh` | Regenerates `core/contract_types.py` from the vendored portal schemas |
@@ -35,7 +35,7 @@ Requires a 9thSense account and its onboarding portal. License: LGPL-3.
 1. Put this repository on the Odoo server's `addons_path`.
 2. `pip install -r requirements.txt` in Odoo's Python environment (Odoo.sh does
    this automatically).
-3. Install **9thSense Onboarding** from Apps. It installs Recruitment,
+3. Install **ninthsense** from Apps. It installs Recruitment,
    Employees and Skills if they are missing, and seeds the "Standard
    Onboarding" template, the document types and the email template.
 

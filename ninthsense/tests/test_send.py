@@ -25,8 +25,8 @@ NO_MAIL_SERVER_WARNING = (
 
 def configure_portal(env):
     params = env["ir.config_parameter"].sudo()
-    params.set_str("ninthsense_onboarding.portal_url", PORTAL_URL)
-    params.set_str("ninthsense_onboarding.secret", SECRET)
+    params.set_str("ninthsense.portal_url", PORTAL_URL)
+    params.set_str("ninthsense.secret", SECRET)
 
 
 def hired_applicant(env, values):
@@ -179,7 +179,7 @@ class TestSendLink(BaseCommon):
         self.assertFalse(self._requests(applicant))
 
     def test_missing_settings_are_refused(self):
-        self.env["ir.config_parameter"].sudo().set_str("ninthsense_onboarding.secret", "")
+        self.env["ir.config_parameter"].sudo().set_str("ninthsense.secret", "")
         with self.assertRaisesRegex(UserError, "not set up yet"):
             self.applicant.action_send_onboarding_link()
         self.assertFalse(self._requests())

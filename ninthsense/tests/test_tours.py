@@ -122,11 +122,9 @@ class TestTours(HttpCase):
         )
 
         params = self.env["ir.config_parameter"].sudo()
-        self.assertEqual(
-            params.get_str("ninthsense_onboarding.portal_url"), "https://onboarding.example.test"
-        )
-        self.assertEqual(params.get_str("ninthsense_onboarding.link_validity_days"), "21")
-        self.assertTrue(params.get_str("ninthsense_onboarding.secret"))
+        self.assertEqual(params.get_str("ninthsense.portal_url"), "https://onboarding.example.test")
+        self.assertEqual(params.get_str("ninthsense.link_validity_days"), "21")
+        self.assertTrue(params.get_str("ninthsense.secret"))
 
     def test_template_tour(self):
         manager = new_test_user(
@@ -141,7 +139,7 @@ class TestTours(HttpCase):
             login=manager.login,
         )
 
-        standard = self.env.ref("ninthsense_onboarding.template_onboarding")
+        standard = self.env.ref("ninthsense.template_onboarding")
         self.assertEqual(len(standard.line_ids), 9)
         self.assertFalse(standard.line_ids[0].accept_jpg)
         foreign = self.env["ninthsense.onboarding.template"].search(

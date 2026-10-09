@@ -2,7 +2,7 @@ from odoo.addons.base.tests.common import BaseCommon
 from odoo.modules.module import get_manifest
 from odoo.tools.misc import file_path
 
-MODULE = "ninthsense_onboarding"
+MODULE = "ninthsense"
 
 
 class TestInstall(BaseCommon):

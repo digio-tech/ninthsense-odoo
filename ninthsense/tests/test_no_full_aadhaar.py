@@ -68,7 +68,7 @@ class TestNoFullAadhaar(HttpCase):
             self.env, {"partner_name": "Priya Raghavan", "email_from": "priya.aadhaar@example.test"}
         )
         last_mail_id = self._last_mail_id()
-        with self.assertLogs("odoo.addons.ninthsense_onboarding", level="DEBUG") as captured:
+        with self.assertLogs("odoo.addons.ninthsense", level="DEBUG") as captured:
             request, token = send_link(self.env, applicant)
             post_documents(self, request, token)
             post_verification(

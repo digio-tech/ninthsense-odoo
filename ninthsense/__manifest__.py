@@ -1,5 +1,5 @@
 {
-    "name": "9thSense Onboarding",
+    "name": "ninthsense",
     "version": "20.0.1.0.0",
     "category": "Human Resources/Recruitment",
     "summary": "Collect a hired applicant's documents through 9thSense and fill the new employee",
@@ -37,6 +37,6 @@ Requires a 9thSense account and its onboarding portal.
         "wizard/link_dialog_views.xml",
     ],
     "assets": {
-        "web.assets_tests": ["ninthsense_onboarding/static/tests/tours/*.js"],
+        "web.assets_tests": ["ninthsense/static/tests/tours/*.js"],
     },
 }

@@ -34,7 +34,7 @@ AADHAAR_EXTRACTED = {
     "aadhaar_number": "2345 6789 0123",
 }
 PAN_EXTRACTED = {"name": "Priya Raghavan", "pan_number": "abcpr1234f"}
-LOGGER = "odoo.addons.ninthsense_onboarding"
+LOGGER = "odoo.addons.ninthsense"
 
 
 def _fail_with_personal_data(*args, **kwargs):

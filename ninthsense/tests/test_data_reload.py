@@ -5,7 +5,7 @@ from psycopg2 import IntegrityError
 
 from .test_send import configure_portal, hired_applicant, make_template
 
-MODULE = "ninthsense_onboarding"
+MODULE = "ninthsense"
 
 
 def _line(template, code):

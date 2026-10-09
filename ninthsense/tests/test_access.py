@@ -49,7 +49,7 @@ class TestAccess(BaseCommon):
         visible = self.env["ir.ui.menu"].with_user(self.interviewer)._visible_menu_ids()
         for menu in MENUS:
             with self.subTest(menu=menu):
-                self.assertNotIn(self.env.ref(f"ninthsense_onboarding.{menu}").id, visible)
+                self.assertNotIn(self.env.ref(f"ninthsense.{menu}").id, visible)
 
     def test_recruiter_sees_the_send_button_page_and_menus(self):
         views = self.env["hr.applicant"].with_user(self.recruiter).get_views([(False, "form")])
@@ -60,7 +60,7 @@ class TestAccess(BaseCommon):
         visible = self.env["ir.ui.menu"].with_user(self.recruiter)._visible_menu_ids()
         for menu in MENUS:
             with self.subTest(menu=menu):
-                self.assertIn(self.env.ref(f"ninthsense_onboarding.{menu}").id, visible)
+                self.assertIn(self.env.ref(f"ninthsense.{menu}").id, visible)
 
     def test_recruiter_without_employee_access_cannot_create_an_employee(self):
         self.assertFalse(self.recruiter.has_group("hr.group_hr_user"))

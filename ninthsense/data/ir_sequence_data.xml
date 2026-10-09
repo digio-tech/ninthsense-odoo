@@ -2,7 +2,7 @@
 <odoo noupdate="1">
     <record id="seq_onboarding_request" model="ir.sequence">
         <field name="name">Onboarding Request</field>
-        <field name="code">ninthsense_onboarding.request</field>
+        <field name="code">ninthsense.request</field>
         <field name="prefix">ONB-%(year)s-</field>
         <field name="padding">4</field>
         <field name="company_id" eval="False"/>

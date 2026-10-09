@@ -92,7 +92,7 @@ class TestApplicantButton(BaseCommon):
                 self.assertEqual(BUTTON in views["views"]["form"]["arch"], expected)
 
     def test_menu_sits_under_the_recruitment_root(self):
-        menu = self.env.ref("ninthsense_onboarding.menu_onboarding_requests")
+        menu = self.env.ref("ninthsense.menu_onboarding_requests")
         self.assertEqual(menu.parent_id, self.env.ref("hr_recruitment.menu_hr_recruitment_root"))
         self.assertEqual(menu.name, "Onboarding")
         self.assertEqual(menu.sequence, 3)

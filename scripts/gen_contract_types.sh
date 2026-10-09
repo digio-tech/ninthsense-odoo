@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Regenerate ninthsense_onboarding/core/contract_types.py from the vendored
+# Regenerate ninthsense/core/contract_types.py from the vendored
 # portal schemas. Only the completion types are used; the header pins the
 # digests of both schemas so a schema change shows up in review.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SCHEMA_DIR="$ROOT/ninthsense_onboarding/schemas"
-OUT="$ROOT/ninthsense_onboarding/core/contract_types.py"
+SCHEMA_DIR="$ROOT/ninthsense/schemas"
+OUT="$ROOT/ninthsense/core/contract_types.py"
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 

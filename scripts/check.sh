@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# The single gate for ninthsense_onboarding: lint, dependency audit, core unit
+# The single gate for ninthsense: lint, dependency audit, core unit
 # tests and the Odoo test suite on a throwaway database. CI runs this too.
 #
 # ODOO_DIR  Odoo 20 checkout holding odoo-bin and a .venv (default: this repo's parent)
@@ -28,8 +28,8 @@ _pg_tool() {
 }
 DROPDB="$(_pg_tool dropdb)"
 
-DB="ninthsense_onboarding_test_$(date +%s)"
-LOG_FILE="$(mktemp -t ninthsense_onboarding_check_XXXXXX.log)"
+DB="ninthsense_test_$(date +%s)"
+LOG_FILE="$(mktemp -t ninthsense_check_XXXXXX.log)"
 status=0
 
 cleanup() {
@@ -52,9 +52,9 @@ echo "== ruff format --check =="
 uvx ruff format --check . || status=1
 
 echo "== pip-audit against the addon's dependencies =="
-FREEZE_FILE="$(mktemp -t ninthsense_onboarding_freeze_XXXXXX.txt)"
+FREEZE_FILE="$(mktemp -t ninthsense_freeze_XXXXXX.txt)"
 uv pip freeze --python "$VENV_PYTHON" > "$FREEZE_FILE"
-AUDIT_FILE="$(mktemp -t ninthsense_onboarding_audit_XXXXXX.txt)"
+AUDIT_FILE="$(mktemp -t ninthsense_audit_XXXXXX.txt)"
 : > "$AUDIT_FILE"
 while IFS= read -r package; do
     [ -z "$package" ] && continue
@@ -64,12 +64,12 @@ uvx pip-audit -r "$AUDIT_FILE" || status=1
 rm -f "$FREEZE_FILE" "$AUDIT_FILE"
 
 echo "== core unit tests (odoo blocked) =="
-(cd ninthsense_onboarding && "$VENV_PYTHON" -m unittest discover -s core/tests -t .) || status=1
+(cd ninthsense && "$VENV_PYTHON" -m unittest discover -s core/tests -t .) || status=1
 
 echo "== odoo tests on a throwaway database =="
 "$VENV_PYTHON" "$ODOO_BIN" "${ODOO_ARGS[@]}" \
-    -d "$DB" --db-filter="^${DB}\$" --http-port="$HTTP_PORT" -i ninthsense_onboarding \
-    --test-tags /ninthsense_onboarding --stop-after-init \
+    -d "$DB" --db-filter="^${DB}\$" --http-port="$HTTP_PORT" -i ninthsense \
+    --test-tags /ninthsense --stop-after-init \
     2>&1 | tee "$LOG_FILE"
 
 if grep -qE ': (FAIL|ERROR): ' "$LOG_FILE"; then

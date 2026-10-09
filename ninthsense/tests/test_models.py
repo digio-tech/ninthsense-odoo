@@ -65,7 +65,7 @@ class TestOnboardingModels(BaseCommon):
         self.assertFalse(request.link_expired)
 
     def test_installed_template_lines(self):
-        template = self.env.ref("ninthsense_onboarding.template_onboarding")
+        template = self.env.ref("ninthsense.template_onboarding")
         expected = [
             ("aadhaar_front", True, ".pdf,.jpg,.jpeg,.png"),
             ("aadhaar_back", False, ".pdf,.jpg,.jpeg,.png"),
@@ -96,7 +96,7 @@ class TestOnboardingModels(BaseCommon):
             request.line_ids[0].max_mb = 21
 
     def test_form_renders_empty_states(self):
-        view = self.env.ref("ninthsense_onboarding.onboarding_request_view_form")
+        view = self.env.ref("ninthsense.onboarding_request_view_form")
         arch = self.Request.get_view(view.id, "form")["arch"]
         for text in ("No documents yet", "No data received yet", "No fill report yet"):
             self.assertIn(text, arch)

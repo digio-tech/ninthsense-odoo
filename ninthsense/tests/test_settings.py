@@ -5,9 +5,9 @@ from odoo.tests import new_test_user
 from ..core.links import hash_token
 from .test_send import PORTAL_URL, hired_applicant
 
-URL_KEY = "ninthsense_onboarding.portal_url"
-SECRET_KEY = "ninthsense_onboarding.secret"
-DAYS_KEY = "ninthsense_onboarding.link_validity_days"
+URL_KEY = "ninthsense.portal_url"
+SECRET_KEY = "ninthsense.secret"
+DAYS_KEY = "ninthsense.link_validity_days"
 SECRET = "k" * 40
 NEW_SECRET = "n" * 40
 
@@ -122,11 +122,11 @@ class TestOnboardingSettings(BaseCommon):
         from .. import uninstall_hook
 
         self._save(new_secret=SECRET)
-        self.params.set_str("ninthsense_onboarding.anything_else", "x")
+        self.params.set_str("ninthsense.anything_else", "x")
         self.params.set_str("ninthsenseXonboarding.other", "kept")
 
         uninstall_hook(self.env)
 
         keys = self.params.search([("key", "=like", "ninthsense%")]).mapped("key")
-        self.assertEqual([key for key in keys if key.startswith("ninthsense_onboarding.")], [])
+        self.assertEqual([key for key in keys if key.startswith("ninthsense.")], [])
         self.assertIn("ninthsenseXonboarding.other", keys)

@@ -7,7 +7,7 @@ from .portal_helpers import PREFIX, post_documents, post_verification, send_link
 from .test_create_employee import OFFICER_GROUPS
 from .test_send import PORTAL_URL, SECRET, hired_applicant
 
-LOGGER = "odoo.addons.ninthsense_onboarding"
+LOGGER = "odoo.addons.ninthsense"
 EMAIL = "priya.log@example.test"
 NAME = "Priya Raghavan"
 ACCOUNT_NUMBER = "50100247731902"

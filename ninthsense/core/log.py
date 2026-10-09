@@ -3,7 +3,7 @@ import logging
 import re
 import uuid
 
-_logger = logging.getLogger("odoo.addons.ninthsense_onboarding")
+_logger = logging.getLogger("odoo.addons.ninthsense")
 
 _CORRELATION_ID_RE = re.compile(r"^[A-Za-z0-9._-]{1,64}$")
 

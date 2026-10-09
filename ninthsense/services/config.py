@@ -5,10 +5,10 @@ from odoo.tools import config as odoo_config
 
 from ..core import config as core_config
 
-PORTAL_URL_KEY = "ninthsense_onboarding.portal_url"
-SECRET_KEY = "ninthsense_onboarding.secret"
-LINK_VALIDITY_DAYS_KEY = "ninthsense_onboarding.link_validity_days"
-_KEY_PREFIX = "ninthsense_onboarding."
+PORTAL_URL_KEY = "ninthsense.portal_url"
+SECRET_KEY = "ninthsense.secret"
+LINK_VALIDITY_DAYS_KEY = "ninthsense.link_validity_days"
+_KEY_PREFIX = "ninthsense."
 
 
 def _allow_insecure_localhost() -> bool:

@@ -6,7 +6,7 @@ from core import log
 
 class TestLog(unittest.TestCase):
     def test_event_carries_name_outcome_and_correlation_id(self):
-        with self.assertLogs("odoo.addons.ninthsense_onboarding", level="INFO") as captured:
+        with self.assertLogs("odoo.addons.ninthsense", level="INFO") as captured:
             log.event(
                 "request.link_sent",
                 outcome="ok",
@@ -20,14 +20,14 @@ class TestLog(unittest.TestCase):
         self.assertIn('"status": "link_sent"', message)
 
     def test_disallowed_keys_are_dropped(self):
-        with self.assertLogs("odoo.addons.ninthsense_onboarding", level="INFO") as captured:
+        with self.assertLogs("odoo.addons.ninthsense", level="INFO") as captured:
             log.event("request.link_sent", outcome="ok", not_allowed="super-secret-value")
         message = captured.records[0].getMessage()
         self.assertNotIn("not_allowed", message)
         self.assertNotIn("super-secret-value", message)
 
     def test_value_for_disallowed_key_never_appears(self):
-        with self.assertLogs("odoo.addons.ninthsense_onboarding", level="INFO") as captured:
+        with self.assertLogs("odoo.addons.ninthsense", level="INFO") as captured:
             log.event(
                 "request.link_sent",
                 outcome="ok",
@@ -40,7 +40,7 @@ class TestLog(unittest.TestCase):
         self.assertNotIn("Priya Raghavan", message)
 
     def test_email_name_and_aadhaar_values_never_appear(self):
-        with self.assertLogs("odoo.addons.ninthsense_onboarding", level="INFO") as captured:
+        with self.assertLogs("odoo.addons.ninthsense", level="INFO") as captured:
             log.event(
                 "request.verified",
                 outcome="ok",
@@ -55,7 +55,7 @@ class TestLog(unittest.TestCase):
             self.assertNotIn(leaked, message)
 
     def test_only_allow_listed_keys_are_emitted(self):
-        with self.assertLogs("odoo.addons.ninthsense_onboarding", level="INFO") as captured:
+        with self.assertLogs("odoo.addons.ninthsense", level="INFO") as captured:
             log.event("x", outcome="ok", **dict.fromkeys(log.ALLOWED_KEYS, 1), extra=2)
         message = captured.records[0].getMessage()
         self.assertNotIn("extra", message)
@@ -143,7 +143,7 @@ class TestWhere(unittest.TestCase):
         self.assertIsNone(log.where(ValueError("x")))
 
     def test_where_is_an_allowed_key(self):
-        with self.assertLogs("odoo.addons.ninthsense_onboarding", level="INFO") as captured:
+        with self.assertLogs("odoo.addons.ninthsense", level="INFO") as captured:
             log.event("portal_call", outcome="server_error", where="a.b:c:1")
         self.assertIn('"where": "a.b:c:1"', captured.records[0].getMessage())
 

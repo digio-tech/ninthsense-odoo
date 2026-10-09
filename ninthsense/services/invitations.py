@@ -7,7 +7,7 @@ from ..core import links, log
 from ..core.errors import NotConfigured
 from ..models.onboarding_request import OPEN_STATES
 
-_TEMPLATE_XMLID = "ninthsense_onboarding.mail_template_onboarding_link"
+_TEMPLATE_XMLID = "ninthsense.mail_template_onboarding_link"
 _MAIL_CRON_XMLID = "mail.ir_cron_mail_scheduler_action"
 _DEFAULT_SMTP_SERVER = "localhost"
 

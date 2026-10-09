@@ -14,7 +14,7 @@ from ..services import employee_fill
 from .test_create_employee import EmployeeCase, open_request, receive_data
 from .test_send import configure_portal, default_template, hired_applicant, make_template
 
-TEMPLATE_XMLID = "ninthsense_onboarding.template_onboarding"
+TEMPLATE_XMLID = "ninthsense.template_onboarding"
 
 
 class TestOnboardingTemplate(BaseCommon):
